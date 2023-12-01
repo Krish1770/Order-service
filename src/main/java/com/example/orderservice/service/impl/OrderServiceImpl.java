@@ -8,6 +8,7 @@ import com.example.orderservice.entity.Items;
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.entity.OrderItems;
 import com.example.orderservice.feignClient.BillCollaboration;
+import com.example.orderservice.feignClient.ProxyCollaboration;
 import com.example.orderservice.repository.OrderRepository;
 import com.example.orderservice.repository.service.CustomerRepoService;
 import com.example.orderservice.repository.service.ItemRepoService;
@@ -36,6 +37,8 @@ import java.util.concurrent.CompletableFuture;
 public class OrderServiceImpl implements OrderService {
 
 
+    @Autowired
+    private ProxyCollaboration proxyCollaboration;
     @Autowired
     private ItemRepoService itemRepoService;
     @Autowired
@@ -122,13 +125,17 @@ public class OrderServiceImpl implements OrderService {
 
         BillDto billDto=new BillDto(customer.get().getName(),savedOrder,savedOrderItems,gstList,customer.get().getEmail());
 
-        JSONObject jsonObject=new JSONObject(billDto);
+
 
         System.out.println(billDto.getOrder().getAmount());
-//   billCollaboration.createBills(jsonObject);
-String id=billCollaboration.createBills( billDto).getBody().getData().toString();
-        System.out.println(id);
- savedOrder.setBillId(id);
+
+
+
+        proxyCollaboration.createBills(billDto);
+//                .getBody().getData().toString();
+//String id=billCollaboration.createBills( billDto).getBody().getData().toString();
+//        System.out.println(id);
+// savedOrder.setBillId(id);
  orderRepoService.save(savedOrder);
         return (ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(HttpStatus.OK,"order saved",savedOrder.getOrderId())));
 
@@ -136,12 +143,7 @@ String id=billCollaboration.createBills( billDto).getBody().getData().toString()
 
     private String orderIdGenerator() {
 
-
         String alphabets="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-
-
-
 
         Random random=new Random();
 
