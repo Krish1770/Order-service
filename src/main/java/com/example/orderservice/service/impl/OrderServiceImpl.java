@@ -32,6 +32,9 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -53,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
    @Autowired
    private  BillCollaboration billCollaboration;
     @Override
-    public ResponseEntity<ResponseDTO> add(OrderDTO orderDTO) {
+    public ResponseEntity<ResponseDTO> add(OrderDTO orderDTO) throws ExecutionException, InterruptedException, TimeoutException {
 
 
         List<BigDecimal> gstList=new ArrayList<>();
@@ -129,14 +132,22 @@ public class OrderServiceImpl implements OrderService {
 
         System.out.println(billDto.getOrder().getAmount());
 
+        System.out.println("billDTO"+billDto);
 
+//      CompletableFuture<ResponseEntity<ResponseDTO>>
+        String result= (proxyCollaboration.createBills(billDto).getBody()).getData().toString();
+        System.out.println(result);
+//      String id=result.get().getBody().getData().toString();
 
-        proxyCollaboration.createBills(billDto);
+        System.out.println("val"+ result);
 //                .getBody().getData().toString();
 //String id=billCollaboration.createBills( billDto).getBody().getData().toString();
 //        System.out.println(id);
-// savedOrder.setBillId(id);
+
+ savedOrder.setBillId(result);
  orderRepoService.save(savedOrder);
+
+
         return (ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(HttpStatus.OK,"order saved",savedOrder.getOrderId())));
 
     }

@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public interface OrderService {
-    ResponseEntity<ResponseDTO> add(OrderDTO orderDTO);
+    ResponseEntity<ResponseDTO> add(OrderDTO orderDTO) throws ExecutionException, InterruptedException, TimeoutException;
 
 }

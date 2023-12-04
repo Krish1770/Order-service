@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.concurrent.CompletableFuture;
 
 
 @FeignClient(name = "PROXY-SERVICE",url = "http://localhost:8082")
@@ -16,5 +17,5 @@ public interface ProxyCollaboration {
 
 
     @PostMapping("Proxy")
-    ResponseEntity<ResponseDTO> createBills( @RequestBody  BillDto billDto);
+   ResponseEntity<ResponseDTO> createBills(@RequestBody  BillDto billDto);
 }
