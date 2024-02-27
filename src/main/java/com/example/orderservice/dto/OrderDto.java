@@ -3,17 +3,15 @@ package com.example.orderservice.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
+import java.util.LinkedHashMap;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class ResponseDTO {
+public class OrderDto {
 
-    private HttpStatus status;
+    private LinkedHashMap<Long,Long> Products;
 
-    private String Message;
-
-    private Object data;
+    private Long customerId;
 }

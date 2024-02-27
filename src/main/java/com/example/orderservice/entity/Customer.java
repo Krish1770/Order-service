@@ -30,4 +30,7 @@ public class Customer {
 
     @Column(name = "emailId")
     private String email;
+
+//    @Column(name = "tenant_id")
+//    private String tenantId;
 }

@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.LinkedHashMap;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO {
+public class LoginDto {
 
-    private LinkedHashMap<Long,Long> Products;
+    private String email;
 
-    private Long customerId;
+
 }

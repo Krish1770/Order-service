@@ -1,0 +1,27 @@
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.hibernate.show-sql=true
+#spring.config.import=optional:bashrc:.env
+#spring.datasource.url=${DATABASE_URL}
+#spring.datasource.username=postgres
+#spring.datasource.password=root
+
+
+spring :
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#      ddl-auto: create
+#      show-sql: true
+#  config:
+#    import: optional:bashrc:.env
+  datasource:
+#    url: jdbc:postgresql://localhost:5432/orderManagement
+
+     url: jdbc:postgresql://localhost:5432/tenantDb
+     username: postgres
+     password: root
+order: order
+defaultTenant: tenantDb
+
