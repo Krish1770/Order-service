@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.channels.NetworkChannel;
-
 @RestController
 public class OrderController implements OrderApi {
 
@@ -20,12 +18,8 @@ public class OrderController implements OrderApi {
 
     @Override
     public ResponseEntity<OrderResponseDto> add(OrderDto orderDTO) {
+        return orderService.add(orderDTO);
 
-//        try {
-            return orderService.add(orderDTO);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new OrderResponseDto(HttpStatus.NOT_FOUND, "Exception found in O", ""));
-//        }
     }
 
     @Override

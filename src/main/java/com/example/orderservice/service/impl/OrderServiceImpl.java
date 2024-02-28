@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
 
 
             Double totalAmt = 0.0;
-            LinkedHashMap<Long, String> itemResult = new LinkedHashMap<>();
+           itemResult = new LinkedHashMap<>();
             if (orderDTO.getProducts().keySet().isEmpty())
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new OrderResponseDto(HttpStatus.NOT_FOUND, "orderList is Empty", ""));
             Optional<List<Items>> itemsList = itemRepoService.findByItemIdIn(orderDTO.getProducts().keySet());
@@ -87,9 +87,7 @@ public class OrderServiceImpl implements OrderService {
             }
             for (Long productId : orderDTO.getProducts().keySet()) {
                 OrderItems orderItem = new OrderItems();
-//                Optional<Items> resultItem = itemRepoService.findById(productId);
                 if (itemsIdList.contains(productId))
-//                if (resultItem.isPresent()) {
                 {
                     int indexOfTheitem = itemsIdList.indexOf(productId);
                     Items resultItem = itemsList.get().get(indexOfTheitem);
@@ -129,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
 
       log.info(billDto.getOrder().getAmount()+"");
 
-        System.out.println("billDTO" + billDto);
+      log.info(String.valueOf(billDto));
 
         if (!billDto.getOrderItems().isEmpty()) {
             String result = (proxyCollaboration.createBills(billDto).getBody()).getData().toString();

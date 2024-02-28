@@ -3,3 +3,23 @@ datasource.driverClassName: org.postgresql.Driver
 datasource.url: jdbc:postgresql://localhost:5432/tenantDb
 datasource.username: postgres
 datasource.password: root
+
+#tenants:
+#  datasource:
+#    tenantDb:
+#      url: jdbc:postgresql://localhost:5432/tenantDb
+#      username: postgres
+#      password: root
+#      driverClassName: org.postgresql.Driver
+#    tenant_1:
+#      url: jdbc:postgresql://localhost:5432/tenant_1
+#      username: postgres
+#      password: root
+#      driverClassName: org.postgresql.Driver
+#    tenant_2:
+#     url: jdbc:postgresql://localhost:5432/tenant_2
+#     username: postgres
+#     password: root
+#     driverClassName: org.postgresql.Driver
+#
+
